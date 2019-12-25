@@ -1,6 +1,6 @@
 @extends('layouts.element.kasir_main')
 
-@section('title', 'Cashier')
+@section('title', 'Cashier - Home')
 
 @php
     $session = Session::get('user');

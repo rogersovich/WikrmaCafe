@@ -1,6 +1,6 @@
 @extends('layouts.element.kasir_main')
 
-@section('title', 'Cashier')
+@section('title', 'Cashier - Booking')
 
 @php
     $session = Session::get('user');
@@ -16,17 +16,19 @@
             <div class="container bg-broken-white pt-50">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-1"></div>
+                        {{-- <div class="col-md-1"></div>
                         <div class="col-md-10">
+                            <form action="{{ route('kasir.tableSearch') }}" method="GET">
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" style="border-radius: 22px 0 0 22px; border: none;"><i class="ni ni-zoom-split-in"></i></span>
                                 </div>
-                                <input style="border-radius: 0 22px 22px 0; border: none;" class="form-control" placeholder="Search" type="text">
+                                    <input name="search" style="border-radius: 0 22px 22px 0; border: none;" class="form-control" placeholder="Search" type="text">
+                                    <input type="hidden" name="floor_id" id="floor_id">
+                                </div> 
                             </div>
-
-                        </div>
-                        <div class="col-md-1"></div>
+                        </form>
+                        <div class="col-md-1"></div> --}}
                     </div>
                     <div class="row">
                         <div class="col-md-1"></div>
@@ -38,28 +40,75 @@
                                     <a href="javascript:;" id="{{ $f->id }}" style="border-radius: 22px;" class="btn floor-active floor-btn btn-primary btn-block text-left">
                                         <span class="text-sm">
                                             Floor {{ $f->name }}
-                                        </span>
+                                        </span>    
+                                        <input type="hidden" class="getfloor_id" value="{{ $f->id }}">
                                     </a>
                                 @else
                                     <a href="javascript:;" id="{{ $f->id }}" style="border-radius: 22px;" class="btn floor-isactive floor-btn btn-broken-white btn-block text-left">
                                         <span class="text-sm">
                                             Floor {{ $f->name }}
                                         </span>
+                                        <input type="hidden" class="getfloor_id" value="{{ $f->id }}">
                                     </a>
                                 @endif
+                                
+
+
                                 @endforeach
 
                             </div>
                         </div>
+                        
+                        @if (@$tables == null)
+                        
                         <div class="col-md-7">
                             <div class="container pl-4">
                                 <div class="row table-all">
-                                    <button id="test" class="btn btn-primary">
-                                        test
-                                    </button>
+                                    
                                 </div>
                             </div>
                         </div>
+
+                        @else
+                        
+                        <div class="col-md-7">
+                            <div class="container pl-4">
+                                <div class="row">
+                                    @foreach ($tables as $t)
+                                    @if ($t->status == 0)    
+                                        <div class="col p-2">
+                                            <div class="card">
+                                                <a href="javascript:;" data-toggle="modal" data-target="#exampleModal`+i.id+`">
+                                                    <div class="card-body bg-table-isactive">
+                                                        <h4 class="card-title text-dark text-center mb-2">
+                                                            {{ $t->table }}
+                                                        </h4>
+        
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <div class="col p-2">
+                                            <div class="card">
+                                                <a href="javascript:;" data-toggle="modal" data-target="#exampleModal`+i.id+`">
+                                                    <div class="card-body bg-gradient-primary">
+                                                        <h4 class="card-title text-white text-center mb-2">
+                                                            {{ $t->table }}
+                                                        </h4>
+        
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        @endif
+                                    
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+
+                        @endif
                         <div class="col-md-1"></div>
                     </div>
 
@@ -83,7 +132,9 @@
 
     $( document ).ready(function() {
 
-
+        
+        var floor_id = $('.floor-active .getfloor_id').val();
+        $('#floor_id').val(floor_id);
 
         $(".floor-btn").on("click",function(e){
             var thisId = $(this).attr('id');
@@ -96,6 +147,9 @@
             $(this).addClass('btn-primary')
             $('.floor-btn').not('.floot-active').addClass('floor-isactive');
             $(this).removeClass('floor-isactive');
+
+            var floor_id = $('.floor-active .getfloor_id').val();
+            $('#floor_id').val(floor_id);
 
             $.ajax({
                 url : "{{ url('getTables') }}/" +thisId,
@@ -297,7 +351,7 @@
 
         //BATAS
 
-
+        console.log(floor_id);
 
     });
 

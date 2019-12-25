@@ -1,6 +1,6 @@
 @extends('layouts.element.kasir_main')
 
-@section('title', 'Cashier')
+@section('title', 'Cashier - Menu')
 
 @php
     $session = Session::get('user');
@@ -28,16 +28,22 @@
             <div class="container bg-broken-white pt-50">
                 <div class="container">
                     <div class="row">
-                        {{-- <div class="col-md-1"></div> --}}
-                        <div class="col-md-11">
+                        
+                        {{-- <div class="col-md-11">
+                            <form action="{{ route('kasir.menuSearch') }}" method="GET">
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" style="border-radius: 22px 0 0 22px; border: none;"><i class="ni ni-zoom-split-in"></i></span>
+                                    <span class="input-group-text" style="border-radius: 22px 0 0 22px; border: none;">
+                                        <i class="ni ni-zoom-split-in"></i>
+                                    </span>
                                 </div>
-                                <input style="border-radius: 0 22px 22px 0; border: none;" class="form-control" placeholder="Search" type="text">
+                                <input name="search" style="border-radius: 0 22px 22px 0; border: none;" class="form-control" placeholder="Search" type="text">
+                                <input type="hidden" name="menu_id" id="menu_id">
                             </div>
+                            </form>
                         </div>
-                        <div class="col-md-1"></div>
+                        <div class="col-md-1"></div> --}}
+
                     </div>
                     <div class="row">
                         {{-- <div class="col-md-1"></div> --}}
@@ -50,17 +56,23 @@
                                         <span class="text-sm">
                                             {{ $m->name }}
                                         </span>
+                                        <input type="hidden" class="getMenu_id" value="{{ $m->id }}">
                                     </a>
                                 @else
                                     <a href="javascript:;" id="{{ $m->id }}" style="border-radius: 22px;" class="btn menu-isactive menu-btn btn-broken-white btn-block text-left">
                                         <span class="text-sm">
                                             {{ $m->name }}
                                         </span>
+                                        <input type="hidden" class="getMenu_id" value="{{ $m->id }}">
                                     </a>
                                 @endif
                                 @endforeach
                             </div>
                         </div>
+
+                        
+                        @if (@$products == null)
+                        
                         <div class="col-md-8">
                             <div class="container pl-4">
                                 <div class="row menu-all">
@@ -69,6 +81,61 @@
                                 
                             </div>
                         </div>
+                            
+                        @else
+                        
+                        <div class="col-md-8">
+                            <div class="container pl-4">
+                                <div class="row">
+                                    @foreach (@$products as $r)
+                                        <div class="col-md-4 p-1">
+                                            <div class="card shadow" style="height: 320px !important;">
+                                                <img style="height: 130px;" src="{{asset('upload/products/'.$r->picture)}}" class="card-img-top">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="pl-2 col-md-8 col-sm-8">
+                                                            <span class="card-text font-weight-bold text-left">
+                                                                {{ $r->name }}
+                                                            </span> 
+                                                        </div>
+                                                        <div class="pl-2 pr-2 col-md-4 col-sm-4 text-right">
+                                                            
+                                                            <span class="text-sm font-weight-light">
+                                                                {{ $r->stok }}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+            
+                                                    <div class="row pt-1">
+                                                        <div class="pl-2 col-md-12 col-sm-12">
+                                                            <span class="text-sm font-weight-light">
+                                                                {{ $r->MenuCategory->name }}
+                                                            </span>
+                                                        </div>                                        
+                                                    </div>
+            
+                                                    <div class="row">
+                                                        <div class="pl-2 col-md-12 col-sm-12">
+                                                            <h3 class="card-text pb-3 mt-3 text-left text-dark font-weight-light">
+                                                                Rp {{ number_format($r->sell_price) }}
+                                                            </h3>
+                                                        </div>                                        
+                                                    </div>
+                                                    <button data-toggle="modal" data-target="#menuModal{{$r->id}}" type="button" class="btn mt-2 btn-pesan btn-sm btn-primary btn-block">
+                                                        <span class="text-sm">Pesan</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                    @endforeach
+                                </div> 
+                            </div>
+                        </div>
+                            
+                        @endif
+
                         <div class="col-md-1"></div>
                     </div>
                 </div>
@@ -85,6 +152,16 @@
     $( document ).ready(function() {
 
         $('#nama-pelanggan').hide();
+
+        // $('.btn-pesan').on('click', function(){
+        //     var id = $(this).data(id);
+        //     console.log(id.id);
+            
+        //     $('#menuModal5').modal('show');
+        // })
+
+        var menu_id = $('.menu-active .getMenu_id').val();
+        $('#menu_id').val(menu_id);
 
         $('.check-class').on('change', function(){
             var check = $(this).prop('checked');
@@ -108,6 +185,9 @@
             $(this).addClass('btn-primary')
             $('.menu-btn').not('.menu-active').addClass('menu-isactive');
             $(this).removeClass('menu-isactive');
+
+            var menu_id = $('.menu-active .getMenu_id').val();
+            $('#menu_id').val(menu_id);
 
             $.ajax({
                 url : "{{ url('getProducts') }}/" +thisId,

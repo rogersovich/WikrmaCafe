@@ -1,6 +1,6 @@
 @extends('layouts.element.kasir_main')
 
-@section('title', 'Cashier')
+@section('title', 'Cashier - Order')
 
 @php
     $session = Session::get('user');
@@ -17,12 +17,12 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
-                            <div class="input-group mb-4">
+                            {{-- <div class="input-group mb-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" style="border-radius: 22px 0 0 22px; border: none;"><i class="ni ni-zoom-split-in"></i></span>
                                 </div>
                                 <input style="border-radius: 0 22px 22px 0; border: none;" class="form-control" placeholder="Search" type="text">
-                            </div>
+                            </div> --}}
                             @if ($progressCount == 0)
                                 
                             @else    
@@ -168,13 +168,13 @@
                                                     </div>
                                                     @endforeach
                                                 </ul>
-                                                <div class="pb-3">
+                                                {{-- <div class="pb-3">
                                                     <a href="">
                                                         <h5 class="text-info">
                                                             + Show Detail
                                                         </h5>
                                                     </a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>

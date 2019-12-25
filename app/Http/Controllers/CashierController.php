@@ -134,7 +134,7 @@ class CashierController extends Controller
         }
 
         $menus = MenuCategory::all();
-        $products = Product::with('MenuCategory')->get();
+        // $products = Product::with('MenuCategory')->get();
 
         $cart = Cart::with('Product')->get();
         $count = $cart->count();
@@ -147,7 +147,9 @@ class CashierController extends Controller
 
         $total = array_sum($tampung);
 
-        return view('kasir.menu', compact('menus','products','cart','total','count'));
+        $products = null;
+
+        return view('kasir.menu', compact('products', 'menus','cart','total','count'));
     }
 
     public function bookTable($id){
@@ -371,6 +373,61 @@ class CashierController extends Controller
         return redirect()->route('kasir.order');
     }
 
+    public function searchTable(Request $request){
+
+        $cari = $request->search;
+
+        $floors = Floor::all();
+        $bookings = Booking::all();
+        $cart = Cart::with('Product')->get();
+        $tampung = [];
+
+        foreach ($cart as $c) {
+
+            $tampung[] = $c->price * $c->qty;
+        }
+
+        $total = array_sum($tampung);
+        $count = $cart->count();
+
+        $tables = Booking::where('floor_id', $request->floor_id)
+            ->where('table', 'like', '%'.$cari.'%')
+            ->get();
+    
+            // mengirim data pegawai ke view index
+        return view('kasir.table', compact('floors', 'tables', 'total', 'count','cart'));
+
+
+    }
+
+    public function searchMenu(Request $request){
+        
+        $cari = $request->search;
+
+        $cart = Cart::with('Product')->get();
+        $tampung = [];
+
+        foreach ($cart as $c) {
+
+            $tampung[] = $c->price * $c->qty;
+        }
+
+        $total = array_sum($tampung);
+        $count = $cart->count();
+
+        $menus = MenuCategory::all();
+        // $products = Product::with('MenuCategory')->get();
+        $products = Product::where('menu_category_id', $request->menu_id)
+            ->where('name', 'like', '%'.$cari.'%')
+            ->get();
+
+        // dd($products);
+    
+            // mengirim data pegawai ke view index
+        return view('kasir.menu', compact('products', 'menus' ,'total', 'count','cart'));
+
+
+    }
     
 
     public function payment(){

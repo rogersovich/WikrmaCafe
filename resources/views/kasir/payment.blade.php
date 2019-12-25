@@ -1,6 +1,6 @@
 @extends('layouts.element.kasir_main')
 
-@section('title', 'Cashier')
+@section('title', 'Cashier - Pembayaran')
 
 @php
     $session = Session::get('user');

@@ -35,6 +35,10 @@ Route::prefix('kasir')->group(function () {
     Route::get('/', 'CashierController@home')->name('kasir.home');
     Route::get('/table', 'CashierController@table')->name('kasir.table');
     Route::get('/bookTable/{id}', 'CashierController@bookTable')->name('kasir.bookTable');
+    Route::get('/table/search','CashierController@searchTable')->name('kasir.tableSearch');
+    Route::get('/menu/search','CashierController@searchMenu')->name('kasir.menuSearch');
+    Route::get('/order/search','CashierController@searchOrder')->name('kasir.orderSearch');
+    
     
     Route::resource('orders', 'OrderController')->except([
         'show','destroy','index'
