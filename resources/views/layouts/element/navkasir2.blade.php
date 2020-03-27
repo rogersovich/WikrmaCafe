@@ -28,12 +28,12 @@
 
                  <li class="nav-item pt-2">
                     @if ($session)
-                        <a class="nav-link nav-link-icon" href="{{ route('kasir.table') }}">
-                            Table
+                        <a class="nav-link nav-link-icon" href="{{ route('kasir.table', $user->name) }}">
+                            Meja
                         </a>
                     @else
                         <a class="nav-link nav-link-icon" href="javascript:;">
-                            Table
+                            Meja
                         </a>
                     @endif
                 </li>
@@ -54,13 +54,13 @@
                 <li class="nav-item pt-2">
                     
                     <a class="nav-link nav-link-icon" href="{{ route('kasir.order') }}">
-                        Order Status
+                        Status Pemesanan
                         
                     </a>
                 </li>
                 <li class="nav-item pt-2">
                     <a class="nav-link nav-link-icon" href="javascript:;">
-                        Payment
+                        Pembayaran
                     </a>
                 </li>
 
@@ -173,17 +173,17 @@
                                 </label>
                             </div>
                 
-                            <div class="form-group" id="nama-pelanggan">
+                            {{-- <div class="form-group" id="nama-pelanggan">
                                 <label class="form-control-label">
                                     Nama Pelanggan
                                 </label>
                                 <input style="height: 35px;" required type="text" autocomplete="off" name="name" class="form-control form-control-alternative">
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="px-3 py-3">
                            
                             <button type="submit" class="btn btn-primary btn-block">
-                                <span class="text-lg">Finish</span>
+                                <span class="text-lg">Selesai</span>
                             </button>
                         </div>
 
@@ -220,11 +220,11 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right-custom" style="margin-right: 20px;">
                         <div class="dropdown-header noti-title">
-                          <h6 class="text-overflow text-dark m-0">Welcome!</h6>
+                          <h6 class="text-overflow text-dark m-0">Selamat Datang!</h6>
                         </div>
                         <a href="javascript:;" class="dropdown-item">
                           <i class="ni ni-single-02"></i>
-                          <span>My profile</span>
+                          <span>Profile</span>
                         </a>
                         <div class="dropdown-divider"></div>
                           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item">

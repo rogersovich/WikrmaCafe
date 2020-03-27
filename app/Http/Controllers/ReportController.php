@@ -76,17 +76,24 @@ class ReportController extends Controller
                         ->whereBetween('tanggal',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
                         ->distinct('product_id')
                         ->get('product_id');
+                    
+                    if($getReport->count() == 0){
+                        return redirect()->back()->with('danger', 'Data tidak ada');
+                    }else{
 
-                    foreach ($getReport as $gp) {
-                        $reports[] = Report::with('Product.MenuCategory')
-                            ->where('product_id', $gp->product_id)
-                            ->orderBy('product_id', 'desc')
-                            ->first();
+                        foreach ($getReport as $gp) {
+                            $reports[] = Report::with('Product.MenuCategory')
+                                ->where('product_id', $gp->product_id)
+                                ->orderBy('product_id', 'desc')
+                                ->first();
+                        }
+    
+    
+                        $pdf = PDF::loadView('pdf.mingguan_pdf', compact('reports'));
+    
+                        return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
                     }
 
-                    $pdf = PDF::loadView('pdf.mingguan_pdf', compact('reports'));
-
-                    return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
 
                 }else{
 
@@ -98,17 +105,23 @@ class ReportController extends Controller
                         ->distinct('product_id')
                         ->get('product_id');
 
-                    foreach ($getReport as $gp) {
-                        $reports[] = Report::with('Product.MenuCategory')
-                            ->where('product_id', $gp->product_id)
-                            ->orderBy('product_id', 'desc')
-                            ->first();
+                    if($getReport->count() == 0){
+                        return redirect()->back()->with('danger', 'Data tidak ada');
+                    }else{
+
+                        foreach ($getReport as $gp) {
+                            $reports[] = Report::with('Product.MenuCategory')
+                                ->where('product_id', $gp->product_id)
+                                ->orderBy('product_id', 'desc')
+                                ->first();
+                        }
+    
+    
+                        $pdf = PDF::loadView('pdf.mingguan_pdf', compact('reports'));
+    
+                        return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
                     }
 
-
-                    $pdf = PDF::loadView('pdf.mingguan_pdf', compact('reports'));
-
-                    return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
 
                 }
 
@@ -122,21 +135,27 @@ class ReportController extends Controller
                         ->where('bm_jumlah', '<>', null)
                         ->distinct('product_id')
                         ->get('product_id');
+                    
+                    if($getReport->count() == 0){
+                        return redirect()->back()->with('danger', 'Data tidak ada');
+                    }else{
 
-                    $reports = [];
-                    foreach ($getReport as $gp) {
-                        $reports[] = Report::with('Product.MenuCategory','Product.Supplier')
-                            ->where([
-                                ['product_id', '=' , $gp->product_id],
-                                ['bm_jumlah', '<>', null]
-                            ])
-                            ->orderBy('code', 'desc')
-                            ->first();
+                        $reports = [];
+                        foreach ($getReport as $gp) {
+                            $reports[] = Report::with('Product.MenuCategory','Product.Supplier')
+                                ->where([
+                                    ['product_id', '=' , $gp->product_id],
+                                    ['bm_jumlah', '<>', null]
+                                ])
+                                ->orderBy('code', 'desc')
+                                ->first();
+                        }
+    
+                        $pdf = PDF::loadView('pdf.mingguan_pasok_pdf', compact('reports'));
+    
+                        return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
                     }
 
-                    $pdf = PDF::loadView('pdf.mingguan_pasok_pdf', compact('reports'));
-
-                    return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
 
 
                 }else{
@@ -149,22 +168,28 @@ class ReportController extends Controller
                         ->where('bm_jumlah', '<>', null)
                         ->distinct('product_id')
                         ->get('product_id');
+                    
+                    if($getReport->count() == 0){
+                        return redirect()->back()->with('danger', 'Data tidak ada');
+                    }else{
 
-                    $reports = [];
-
-                    foreach ($getReport as $gp) {
-                        $reports[] = Report::with('Product.MenuCategory','Product.Supplier')
-                            ->where([
-                                ['product_id', '=' , $gp->product_id],
-                                ['bm_jumlah', '<>', null]
-                            ])
-                            ->orderBy('code', 'desc')
-                            ->first();
+                        $reports = [];
+    
+                        foreach ($getReport as $gp) {
+                            $reports[] = Report::with('Product.MenuCategory','Product.Supplier')
+                                ->where([
+                                    ['product_id', '=' , $gp->product_id],
+                                    ['bm_jumlah', '<>', null]
+                                ])
+                                ->orderBy('code', 'desc')
+                                ->first();
+                        }
+    
+                        $pdf = PDF::loadView('pdf.mingguan_pasok_pdf', compact('reports'));
+    
+                        return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
                     }
 
-                    $pdf = PDF::loadView('pdf.mingguan_pasok_pdf', compact('reports'));
-
-                    return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
 
                 }
 
@@ -178,16 +203,22 @@ class ReportController extends Controller
                     ->where('tanggal',$day)
                     ->distinct('product_id')
                     ->get('product_id');
+                
+                if($getReport->count() == 0){
+                    return redirect()->back()->with('danger', 'Data tidak ada');
+                }else{
 
-                foreach ($getReport as $gp) {
-                    $reports[] = Report::with('Product.MenuCategory')
-                        ->where('product_id', $gp->product_id)
-                        ->orderBy('product_id', 'desc')
-                        ->first();
+                    foreach ($getReport as $gp) {
+                        $reports[] = Report::with('Product.MenuCategory')
+                            ->where('product_id', $gp->product_id)
+                            ->orderBy('product_id', 'desc')
+                            ->first();
+                    }
+    
+                    $pdf = PDF::loadView('pdf.harian_pdf', compact('reports'));
+                    return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
                 }
 
-                $pdf = PDF::loadView('pdf.harian_pdf', compact('reports'));
-                return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
 
 
             }else{
@@ -198,20 +229,27 @@ class ReportController extends Controller
                     ->where('bm_jumlah', '<>', null)
                     ->distinct('product_id')
                     ->get('product_id');
+                
+                if($getReport->count() == 0){
+                    return redirect()->back()->with('danger', 'Data tidak ada');
+                }else{
 
-                $reports = [];
-                foreach ($getReport as $gp) {
-                    $reports[] = Report::with('Product.MenuCategory','Product.Supplier')
-                        ->where([
-                            ['product_id', '=' , $gp->product_id],
-                            ['bm_jumlah', '<>', null]
-                        ])
-                        ->orderBy('code', 'desc')
-                        ->first();
+                    $reports = [];
+                    foreach ($getReport as $gp) {
+                        $reports[] = Report::with('Product.MenuCategory','Product.Supplier')
+                            ->where([
+                                ['product_id', '=' , $gp->product_id],
+                                ['bm_jumlah', '<>', null]
+                            ])
+                            ->orderBy('code', 'desc')
+                            ->first();
+                    }
+    
+                    $pdf = PDF::loadView('pdf.harian_pasok_pdf', compact('reports'));
+                    return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
+                
                 }
 
-                $pdf = PDF::loadView('pdf.harian_pasok_pdf', compact('reports'));
-                return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
 
             }
 
@@ -226,16 +264,22 @@ class ReportController extends Controller
                         ->distinct('product_id')
                         ->get('product_id');
 
-                    foreach ($getReport as $gp) {
-                        $reports[] = Report::with('Product.MenuCategory')
-                            ->where('product_id', $gp->product_id)
-                            ->orderBy('product_id', 'desc')
-                            ->first();
+                    if($getReport->count() == 0){
+                        return redirect()->back()->with('danger', 'Data tidak ada');
+                    }else{
+
+                        foreach ($getReport as $gp) {
+                            $reports[] = Report::with('Product.MenuCategory')
+                                ->where('product_id', $gp->product_id)
+                                ->orderBy('product_id', 'desc')
+                                ->first();
+                        }
+    
+                        $pdf = PDF::loadView('pdf.bulanan_pdf', compact('reports'));
+    
+                        return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
                     }
 
-                    $pdf = PDF::loadView('pdf.bulanan_pdf', compact('reports'));
-
-                    return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
 
                 }else{
 
@@ -243,17 +287,23 @@ class ReportController extends Controller
                         ->whereMonth('tanggal',$month)
                         ->distinct('product_id')
                         ->get('product_id');
-
-                    foreach ($getReport as $gp) {
-                        $reports[] = Report::with('Product.MenuCategory')
-                            ->where('product_id', $gp->product_id)
-                            ->orderBy('product_id', 'desc')
-                            ->first();
+                    
+                    if($getReport->count() == 0){
+                        return redirect()->back()->with('danger', 'Data tidak ada');
+                    }else{
+                    
+                        foreach ($getReport as $gp) {
+                            $reports[] = Report::with('Product.MenuCategory')
+                                ->where('product_id', $gp->product_id)
+                                ->orderBy('product_id', 'desc')
+                                ->first();
+                        }
+    
+                        $pdf = PDF::loadView('pdf.bulanan_pdf', compact('reports'));
+    
+                        return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
                     }
 
-                    $pdf = PDF::loadView('pdf.bulanan_pdf', compact('reports'));
-
-                    return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
 
                 }
 
@@ -267,21 +317,27 @@ class ReportController extends Controller
                         ->where('bm_jumlah', '<>', null)
                         ->distinct('product_id')
                         ->get('product_id');
+                    
+                    if($getReport->count() == 0){
+                        return redirect()->back()->with('danger', 'Data tidak ada');
+                    }else{
 
-                    $reports = [];
-                    foreach ($getReport as $gp) {
-                        $reports[] = Report::with('Product.MenuCategory','Product.Supplier')
-                            ->where([
-                                ['product_id', '=' , $gp->product_id],
-                                ['bm_jumlah', '<>', null]
-                            ])
-                            ->orderBy('code', 'desc')
-                            ->first();
+                        $reports = [];
+                        foreach ($getReport as $gp) {
+                            $reports[] = Report::with('Product.MenuCategory','Product.Supplier')
+                                ->where([
+                                    ['product_id', '=' , $gp->product_id],
+                                    ['bm_jumlah', '<>', null]
+                                ])
+                                ->orderBy('code', 'desc')
+                                ->first();
+                        }
+    
+                        $pdf = PDF::loadView('pdf.bulanan_pasok_pdf', compact('reports'));
+    
+                        return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
                     }
-
-                    $pdf = PDF::loadView('pdf.bulanan_pasok_pdf', compact('reports'));
-
-                    return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
+                    
 
                 }else{
 
@@ -291,20 +347,26 @@ class ReportController extends Controller
                         ->distinct('product_id')
                         ->get('product_id');
 
-                    $reports = [];
-                    foreach ($getReport as $gp) {
-                        $reports[] = Report::with('Product.MenuCategory','Product.Supplier')
-                            ->where([
-                                ['product_id', '=' , $gp->product_id],
-                                ['bm_jumlah', '<>', null]
-                            ])
-                            ->orderBy('code', 'desc')
-                            ->first();
+                    if($getReport->count() == 0){
+                        return redirect()->back()->with('danger', 'Data tidak ada');
+                    }else{
+                    
+                        $reports = [];
+                        foreach ($getReport as $gp) {
+                            $reports[] = Report::with('Product.MenuCategory','Product.Supplier')
+                                ->where([
+                                    ['product_id', '=' , $gp->product_id],
+                                    ['bm_jumlah', '<>', null]
+                                ])
+                                ->orderBy('code', 'desc')
+                                ->first();
+                        }
+    
+                        $pdf = PDF::loadView('pdf.bulanan_pasok_pdf', compact('reports'));
+    
+                        return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
                     }
 
-                    $pdf = PDF::loadView('pdf.bulanan_pasok_pdf', compact('reports'));
-
-                    return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
 
                 }
 

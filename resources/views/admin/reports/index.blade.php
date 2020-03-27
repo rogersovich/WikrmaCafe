@@ -23,6 +23,17 @@
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
 </div>
 <div class="container-fluid mt--7">
+    @if (session('danger'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-inner--text">
+                    {{session('danger')}}
+            </span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
           <!-- Table -->
   <div class="row">
     <div class="col">
@@ -61,7 +72,7 @@
                             <select name="jenis_laporan" id="jenisLaporan-id" required class="form-control form-control-alternative">
                                 <option value="">Pilih Jenis Laporan</option>
                                 <option value="harian">Harian</option>
-                                <option value="mingguan">Mingguan</option>
+                                {{-- <option value="mingguan">Mingguan</option> --}}
                                 <option value="bulanan">Bulanan</option>
                             </select>
                         </div>

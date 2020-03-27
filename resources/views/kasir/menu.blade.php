@@ -153,13 +153,6 @@
 
         $('#nama-pelanggan').hide();
 
-        // $('.btn-pesan').on('click', function(){
-        //     var id = $(this).data(id);
-        //     console.log(id.id);
-            
-        //     $('#menuModal5').modal('show');
-        // })
-
         var menu_id = $('.menu-active .getMenu_id').val();
         $('#menu_id').val(menu_id);
 
@@ -264,10 +257,10 @@
                                                 <input type="hidden" name="product_id" value="`+ i.id +`">
                                                 <input type="hidden" name="harga" value="`+ i.sell_price +`">
                                                 <button type="button" class="btn btn-danger text-left mt-3" data-dismiss="modal">
-                                                    Cancel
+                                                    Batal
                                                 </button>
                                                 <button type="submit" class="btn btn-info mt-3">
-                                                    Finish
+                                                    Selesai
                                                 </button>
                                             </form>
                                         </div>
@@ -376,10 +369,10 @@
                                             <input type="hidden" name="product_id" value="`+ i.id +`">
                                             <input type="hidden" name="harga" value="`+ i.sell_price +`">
                                             <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">
-                                                Cancel
+                                                Batal
                                             </button>
                                             <button type="submit" class="btn btn-info mt-3">
-                                                Finish
+                                                Selesai
                                             </button>
 
                                             </div>

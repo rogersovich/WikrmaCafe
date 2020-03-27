@@ -25,15 +25,17 @@ class OrderController extends Controller
     public function process(Request $request)
     {
 
-
-        $cek = $request->duit <= $request->total;
-        
+        $test = 10 < 10;
+    
+        // dd($test);
+        $cek = $request->duit < $request->total;
         if($cek){
 
             return back()->with('danger','Uang Anda Tidak Cukup');
 
         }
 
+        // dd($request->all());
 
         $date = Carbon::now();
 
@@ -122,7 +124,7 @@ class OrderController extends Controller
         }
 
         Order::where(['id' => $request->order_id])->update([
-            'change_money' => $request->duit - $order->total_price,
+            'change_money' => $request->duit - $request->total,
             'status' => 1
         ]);
 
@@ -138,7 +140,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        //dd('sdfsddsf');
+        // dd('sdfsddsf');
 
         $user = Auth::user();
 
@@ -149,17 +151,13 @@ class OrderController extends Controller
         if($booking->booking_id == null){
 
             Order::where(['code' => $booking->code])->update([
-                'tanggal' => $date,
                 'total_price' => $request->total,
-                'name' => $request->name,
             ]);
             
         }else{
 
             Order::where(['booking_id' => $booking->booking_id])->update([
-                'tanggal' => $date,
-                'total_price' => $request->total,
-                'name' => $request->name,
+                'total_price' => $request->total
             ]);
 
         }

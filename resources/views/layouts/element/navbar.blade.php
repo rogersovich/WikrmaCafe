@@ -22,11 +22,11 @@
         </a>
         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
           <div class=" dropdown-header noti-title">
-            <h6 class="text-overflow text-dark m-0">Welcome!</h6>
+            <h6 class="text-overflow text-dark m-0">Selamat Datang!</h6>
           </div>
           <a href="javascript:;" class="dropdown-item">
             <i class="ni ni-single-02"></i>
-            <span>My profile</span>
+            <span>Profile</span>
           </a>
           <div class="dropdown-divider"></div>
             <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item">

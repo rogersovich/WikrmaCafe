@@ -39,14 +39,14 @@
                                 @if ($f->name == 1)
                                     <a href="javascript:;" id="{{ $f->id }}" style="border-radius: 22px;" class="btn floor-active floor-btn btn-primary btn-block text-left">
                                         <span class="text-sm">
-                                            Floor {{ $f->name }}
+                                            Lantai {{ $f->name }}
                                         </span>    
                                         <input type="hidden" class="getfloor_id" value="{{ $f->id }}">
                                     </a>
                                 @else
                                     <a href="javascript:;" id="{{ $f->id }}" style="border-radius: 22px;" class="btn floor-isactive floor-btn btn-broken-white btn-block text-left">
                                         <span class="text-sm">
-                                            Floor {{ $f->name }}
+                                            Lantai {{ $f->name }}
                                         </span>
                                         <input type="hidden" class="getfloor_id" value="{{ $f->id }}">
                                     </a>
@@ -207,7 +207,7 @@
                                     <div class="modal-content" style="width: 80%;">
                                         <div class="modal-header">
                                             <h2 class="modal-title text-dark text-center" id="modal-title-default">
-                                                Meja-`+i.table+` Floor `+i.floor.name+`
+                                                Meja-`+i.table+` Lantai `+i.floor.name+`
                                             </h2>
                                             <button type="button" class="close" data-dismiss="modal">
                                                 <span>×</span>
@@ -224,7 +224,7 @@
                                                     i.status == 0
                                                     ?
                                                     `
-                                                        <a href="bookTable/`+i.id+` " class="btn btn-primary">
+                                                        <a href="../bookTable/`+i.id+` " class="btn btn-primary">
                                                             Booking Meja
                                                         </a>
                                                     `
@@ -248,7 +248,6 @@
             })
 
             var cek = $(this).attr('class');
-        console.log(cek);
 
         });
 
@@ -309,7 +308,7 @@
                                 <div class="modal-content" style="width: 80%;">
                                     <div class="modal-header">
                                         <h2 class="modal-title text-dark text-center" id="modal-title-default">
-                                            Meja-`+i.table+` Floor `+i.floor.name+`
+                                            Meja-`+i.table+` Lantai `+i.floor.name+`
                                         </h2>
                                         <button type="button" class="close" data-dismiss="modal">
                                             <span>×</span>
@@ -326,7 +325,7 @@
                                                 i.status == 0
                                                 ?
                                                 `
-                                                    <a href="bookTable/`+i.id+` " class="btn btn-primary">
+                                                    <a href="../bookTable/`+i.id+` " class="btn btn-primary">
                                                         Booking Meja
                                                     </a>
                                                 `

@@ -48,14 +48,14 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Categories
+                                Kategori
                             </li>
                         </ol>
                     </nav>
                 </div>
                 <div class="col-4 text-right">
                     <a href="{{ route('categories.create') }}" class="btn btn-icon btn-neutral btn-round">
-                        <span class="btn-inner--text">Add</span>
+                        <span class="btn-inner--text">Tambah</span>
                         <span class="btn-inner--icon">
                             <i class="ni ni-fat-add"></i>
                         </span>

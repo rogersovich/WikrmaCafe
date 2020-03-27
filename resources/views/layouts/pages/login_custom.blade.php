@@ -8,8 +8,8 @@
         <div class="container">
             <div class="signin-content">
                 <div class="signin-image">
-                    <figure><img src="{{ asset('assets/login/images/signin-image.jpg') }}" alt="sing up image"></figure>
-                    <a href="{{ route('signUp') }}" class="signup-image-link">Create an account</a>
+                    <figure><img src="{{ asset('assets/img/login3-bdp.png') }}" alt="sing up image"></figure>
+                    <a href="{{ route('signUp') }}" class="signup-image-link">Buat Akun</a>
                 </div>
                 <div class="signin-form">
                     <h2 class="form-title">Sign In</h2>
@@ -17,16 +17,16 @@
                         @csrf
                         <div class="form-group">
                             <label><i class="zmdi zmdi-email"></i></label>
-                            <input type="email" name="email" autofocus placeholder="Your Email"/>
+                            <input type="email" name="email" autofocus placeholder="Email Anda"/>
                         </div>
                         <div class="form-group">
                             <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
                             <input type="password" name="password" placeholder="Password"/>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
                             <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
-                        </div>
+                        </div> --}}
                         <div class="form-group form-button">
                             <button style="width: 100px;" type="submit" class="btn btn-primary">Login</button>
                         </div>

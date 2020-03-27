@@ -54,7 +54,7 @@
             </div>
         </div>
         <form action="{{ route('suppliers.pasok') }}" method="POST">
-        <div class="table-responsive p-3" style="background: #f7f8f9;">
+        <div class="table-responsive p-3">
           <table class="table align-items-center table-flush" id="table-category">
             <thead class="thead-light">
                 <tr>

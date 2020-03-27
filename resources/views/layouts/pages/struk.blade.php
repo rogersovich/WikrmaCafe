@@ -43,7 +43,7 @@
 
 
 <!-- Header -->
-    <div class="header bg-gradient-primary py-7 py-lg-8">
+    <div class="header bg-gradient-warning py-7 py-lg-8">
 
     </div>
 
@@ -57,12 +57,12 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <a href="{{ route('kasir.struk.print', $report->id) }}" class="btn btn-primary btn-sm" target="_blank">
+                                <a href="{{ route('kasir.struk.print', $report->id) }}" class="btn btn-warning btn-sm" target="_blank">
                                     CETAK PDF
                                 </a>
                             </div>
                             <div class="col-md-6 text-right">
-                                <a href="{{ route('kasir.home') }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('kasir.home') }}" class="btn btn-warning btn-sm">
                                     Kembali
                                 </a>
                             </div>
@@ -137,9 +137,9 @@
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
                                     <p class="text-center font-weight-bold">
-                                        Terima Kasih & Selamat Berbelanja Kembali
+                                        Terima Kasih Ya Gaiss
                                         <br><br>
-                                        Pembeli Adalah Raja Kami
+                                        Pembeli Tetaplah Pembeli
                                     </p>
                                 </div>
                                 <div class="col-md-4"></div>

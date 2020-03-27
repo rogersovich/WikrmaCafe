@@ -117,7 +117,7 @@
           <li class="nav-item">
               <a id="category-id" class="nav-link" href="{{ route('categories.index') }}">
                   <i class="fa fa-list-alt text-default"></i>
-                  Category
+                  Kategori
               </a>
           </li>
           <li class="nav-item">
@@ -142,7 +142,7 @@
           <li class="nav-item">
               <a id="role-id" class="nav-link" href="{{ route('roles.index') }}">
                   <i class="fa fa-users-cog text-default"></i>
-                  Role
+                  Peran
               </a>
           </li>
 
@@ -172,7 +172,7 @@
         $(document).ready(function(){
 
             var url = window.location.href;
-            var urls = url.split('localhost/app-cafe/public/');
+            var urls = url.split('http://127.0.0.1:8000/');
             //console.log(urls);
             var param = urls[1].split('edit');
             var p = param[0].split('admin');

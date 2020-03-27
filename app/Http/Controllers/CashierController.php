@@ -45,10 +45,10 @@ class CashierController extends Controller
         $total = array_sum($tampung);
         $count = $cart->count();
 
-        return view('kasir.index', compact('count','cart','total'));
+        return view('kasir.index', compact('count','cart','total','user'));
     }
 
-    public function table(){
+    public function table($name){
 
         $user = Auth::user();
 
@@ -65,6 +65,8 @@ class CashierController extends Controller
             Session::put('user', $data);
         }
 
+        // dd($name);
+
         $floors = Floor::all();
         $bookings = Booking::all();
         $cart = Cart::with('Product')->get();
@@ -78,11 +80,35 @@ class CashierController extends Controller
         $total = array_sum($tampung);
         $count = $cart->count();
 
-        return view('kasir.table', compact('floors','bookings','count','cart','total'));
+        $date = Carbon::now();
+
+         // CODE ORDER
+         $kdOrder = Order::select(['code'])->max('code');
+
+         $noUrut = (int) substr($kdOrder, 5, 3);
+ 
+         $noUrut++;
+         $char = "OR";
+         $kdOrder = $char . sprintf("%05s", $noUrut);
+
+
+        if($user){
+
+        }else{
+            Order::create([
+                'name' => $name,
+                'code' => $kdOrder,
+                'tanggal' => $date,
+                'status' => 0,
+            ]);
+        }
+
+
+        return view('kasir.table', compact('floors','bookings','count','cart','total','user'));
     }
 
-    public function takeaway(){
-
+    public function takeaway($name){
+        // dd($name);
         $date = Carbon::now();
 
         // CODE ORDER
@@ -108,6 +134,7 @@ class CashierController extends Controller
         $total = array_sum($tampung);
 
         Order::create([
+            'name' => $name,
             'status' => 0,
             'code' => $kdOrder,
             'tanggal' => $date
@@ -134,7 +161,6 @@ class CashierController extends Controller
         }
 
         $menus = MenuCategory::all();
-        // $products = Product::with('MenuCategory')->get();
 
         $cart = Cart::with('Product')->get();
         $count = $cart->count();
@@ -149,33 +175,24 @@ class CashierController extends Controller
 
         $products = null;
 
-        return view('kasir.menu', compact('products', 'menus','cart','total','count'));
+        return view('kasir.menu', compact('products', 'menus','cart','total','count','user'));
     }
 
     public function bookTable($id){
 
+        // dd('test');
         $date = Carbon::now();
         
         $booking = Booking::where('id', $id)->first();
+        $order = Order::latest('id')->first();
+        //dd($order);
 
         Booking::where(['id' => $id])->update([
             'status' => 1
         ]);
 
-        // CODE ORDER
-        $kdOrder = Order::select(['code'])->max('code');
-
-        $noUrut = (int) substr($kdOrder, 5, 3);
-
-        $noUrut++;
-        $char = "OR";
-        $kdOrder = $char . sprintf("%05s", $noUrut);
-
-        Order::create([
-            'booking_id' => $booking->id,
-            'code' => $kdOrder,
-            'status' => 0,
-            'tanggal' => $date
+        Order::where(['id' => $order->id])->update([
+            'booking_id' => $booking->id
         ]);
 
         return redirect()->route('kasir.menu');
@@ -265,6 +282,8 @@ class CashierController extends Controller
 
     public function process($id){
 
+        $user = Auth::user();
+
         $order = Order::with('Booking','OrderDetails.Product')->where('id', $id)->first();
 
         $orders = Order::with('Booking','OrderDetails.Product')
@@ -286,7 +305,7 @@ class CashierController extends Controller
         $total = array_sum($tampung);
         $count = $cart->count();
 
-        return view('kasir.payment', compact('orders','id','order','orderDetails', 'count','cart','total'));
+        return view('kasir.payment', compact('orders','id','order','orderDetails', 'count','cart','total','user'));
     }
 
     public function order(){
@@ -308,9 +327,9 @@ class CashierController extends Controller
 
         
 
-        $progress = Order::with('Booking','OrderDetails.Product')
-            ->where('status', 0)
+        $progress = Order::where('status', 0)
             ->get();
+        // dd($progress);
 
         $complete = Order::with('Booking','OrderDetails.Product')
             ->where('status', 1)
@@ -338,7 +357,7 @@ class CashierController extends Controller
         $total = array_sum($tampung);
         $count = $cart->count();
 
-        return view('kasir.order', compact('progress','complete','progressCount','total','cart','completeCount','count'));
+        return view('kasir.order', compact('user','progress','complete','progressCount','total','cart','completeCount','count'));
     }
 
     public function struk(){
@@ -432,7 +451,8 @@ class CashierController extends Controller
 
     public function payment(){
 
-        return view('kasir.payment');
+        $user = Auth::user();
+        return view('kasir.payment', compact('user'));
     }
 
     public function orderSuccess(){

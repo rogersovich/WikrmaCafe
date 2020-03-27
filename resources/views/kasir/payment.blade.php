@@ -28,7 +28,7 @@
         <div class="col-sm-8 col-md-8">
             <div class="container bg-broken-white pt-50 pb-4">
                 <div class="container">
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
                             <div class="input-group mb-4">
@@ -38,11 +38,11 @@
                                 <input style="border-radius: 0 22px 22px 0; border: none;" class="form-control" placeholder="Search" type="text">
                             </div>
                             <div class="text-right">
-                                <h4 class="text-primary">View Payment History</h4>
+                                <h4 class="text-primary">Histori Pemesanan</h4>
                             </div>
                         </div>
                         <div class="col-md-1"></div>
-                    </div>
+                    </div> --}}
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
@@ -114,17 +114,17 @@
                 <div class="row" style="border-bottom: 1px #3d3d3d solid;">
                     <div class="col-md-4">
                         <p class="text-sm font-weight-bold">
-                            <span>Number</span>
+                            <span>Kode</span>
                         </p>
                         <p class="text-sm">
                             <span>{{ $order->code }}</span>
                             <br>
-                            <span>Get In</span>
+                            <span>Sudah</span>
                         </p>
                     </div>
                     <div class="col-md-4">
                         <p class="text-sm font-weight-bold">
-                            <span>Name</span>
+                            <span>Nama</span>
                         </p>
                         <p class="text-sm">
                             <span>{{ $order->name }}</span>
@@ -134,7 +134,7 @@
                     </div>
                     <div class="col-md-4">
                         <p class="text-sm font-weight-bold">
-                            <span>Table</span>
+                            <span>Meja</span>
                         </p>
                         <p class="text-sm">
                             <span>
@@ -209,7 +209,7 @@
                      <div class="col-md-5">
 
                         <input type="hidden" name="order_id" value="{{ $order->id }}">
-                        <input style="height: 30px;" type="text" required autofocus autocomplete="off" name="duit" class="text-right form-control">
+                        <input style="height: 30px;" type="text" required autofocus autocomplete="off" name="duit" class="text-left form-control">
                      </div>
                 </div>
 

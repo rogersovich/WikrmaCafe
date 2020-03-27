@@ -75,13 +75,13 @@
                     @if (Route::has('register'))
                         {{-- <a href="{{ route('signUp') }}">Register</a> --}}
                     @endif
-                    <a href="{{ route('kasir.home') }}">Lets go</a>
+                    <a href="{{ route('kasir.home') }}">Mari Lanjut</a>
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    <span style="background: #3b3b3b; color: #fff; padding-right: 20px;">Cafe</span>
+                    <span style="background: #3b3b3b; color: #fff; padding-right: 20px; padding-bottom: 20px;">Cafe</span>
                     <span style="color:#3b3b3b;">Wikrama</span>
                 </div>
 

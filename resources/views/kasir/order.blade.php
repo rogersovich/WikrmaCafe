@@ -28,7 +28,7 @@
                             @else    
                             <div>
                                 <h4 class="text-warning">
-                                    Progress ({{ $progressCount }})
+                                   Dalam Proses ({{ $progressCount }})
                                 </h4>
                             </div>
                             @endif
@@ -94,7 +94,7 @@
                                                         <div class="col-md-4 col-sm-4">
                                                             <h5>
                                                                 <a class="badge badge-pill badge-danger" href="{{ route('kasir.cancelProcess', $o->id) }}">                                                   
-                                                                    Cancel               
+                                                                    Batal               
                                                                 </a>
                                                             </h5>
                                                         </div>
@@ -118,7 +118,7 @@
                                 
                             @else
                             <div>
-                                <h4 class="text-success">Completed ({{ $completeCount }})</h4>
+                                <h4 class="text-success">Sudah Selesai ({{ $completeCount }})</h4>
                             </div>
                             @endif
                         </div>

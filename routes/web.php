@@ -33,7 +33,7 @@ Route::prefix('kasir')->group(function () {
     });
 
     Route::get('/', 'CashierController@home')->name('kasir.home');
-    Route::get('/table', 'CashierController@table')->name('kasir.table');
+    Route::get('/table/{name}', 'CashierController@table')->name('kasir.table');
     Route::get('/bookTable/{id}', 'CashierController@bookTable')->name('kasir.bookTable');
     Route::get('/table/search','CashierController@searchTable')->name('kasir.tableSearch');
     Route::get('/menu/search','CashierController@searchMenu')->name('kasir.menuSearch');
@@ -107,7 +107,7 @@ Route::get('/getProducts/{id}', 'ApiController@getProducts')->name('getProducts'
 
 Route::get('/kasir/orders/success', 'CashierController@orderSuccess')->name('kasir.orderSuccess');
 Route::get('/kasir/menu', 'CashierController@menu')->name('kasir.menu');
-Route::get('/kasir/takeaway', 'CashierController@takeaway')->name('kasir.takeaway');
+Route::get('/kasir/takeaway/{name}', 'CashierController@takeaway')->name('kasir.takeaway');
 Route::post('/kasir/pesenMenu', 'CashierController@pesenMenu')->name('kasir.pesenMenu');
 Route::post('/regiter/process', 'RegisterCustomController@register')->name('register.process');
 Route::get('/kasir/table/{table}','RoleController@destroy')->name('roles.destroy');

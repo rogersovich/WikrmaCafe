@@ -158,9 +158,9 @@
         </div>
         <div class="container text-center pr-150 pl-150" style="margin-top: 100px;">
             <p>
-                Terima Kasih & Selamat Berbelanja Kembali
+                Terima Kasih Ya Gaiss
                 <br><br>
-                Pembeli Adalah Raja Kami
+                Pembeli Tetaplah Pembeli
             </p>
         </div>
     </div>
