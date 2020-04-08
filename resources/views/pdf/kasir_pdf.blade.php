@@ -3,10 +3,14 @@
 
 <style>
 
+    body{
+        font-family: sans-serif;
+        color: #3b3b3b;
+        font-size: 12px;
+    }
+
     .container {
         width: 100%;
-        padding-right: 15px;
-        padding-left: 15px;
         margin-right: auto;
         margin-left: auto;
     }
@@ -19,7 +23,7 @@
 
     th, td {
         font-weight: 300;
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .text-center{
@@ -95,34 +99,38 @@
 <body class="pt-50 pb-50">
 
     <div class="container">
-        <div style="margin-left: 150px;">
+        <div>
         <p class="mt-3">
             Wikrama Cafe
             <br>
-            Jl.absdfsdfsdfsdf
+            Jl. Raya Wangun No.21, RT.01/RW.06, Sindangsari, Kec. Bogor Tim, Kota Bogor, Jawa Barat 16146
             <br>
-            Telp (023)24223423423
+            Telp (0251)8242411
             <br>
-            {{ $data->code }}
+            No Pemesanan:  {{ $data->code }}
+            <br>
+            Nama: {{ $data->name }}
+            <br>
+            Kasir : {{ $user->name }}
         </p>
         <span>
-            ----------------------------------------------------------------------------------------------------------------------------
+            ----------------------------------------------------------------------------------------------------------
         </span>
         <table class="table">
             <tr>
-                <th class="wt-350">Nama Barang</th>
+                <th class="wt-150">Nama Barang</th>
                 <th class="wt-100">Jumlah</th>
                 <th class="wt-100">Harga</th>
                 <th class="wt-100">Subtotal</th>
             </tr>
         </table>
         <span>
-            ----------------------------------------------------------------------------------------------------------------------------
+            ----------------------------------------------------------------------------------------------------------
         </span>
         <table class="table">
             @foreach ($order_details as $od)
             <tr>
-                <td class="wt-350">{{ ucwords($od->product->name.' - '.$od->product->menuCategory->name) }}</td>
+                <td class="wt-150">{{ ucwords($od->product->name.' - '.$od->product->menuCategory->name) }}</td>
                 <td class="wt-100">{{ $od->qty }}</td>
                 <td class="wt-100">{{ $od->product->sell_price }}</td>
                 <td class="wt-100">{{ $od->product->sell_price * $od->qty }}</td>
@@ -130,37 +138,37 @@
             @endforeach
         </table>
         <span>
-            ----------------------------------------------------------------------------------------------------------------------------
+            ----------------------------------------------------------------------------------------------------------
         </span>
         <table class="table">
             <tr>
-                <td class="wt-555">Total</td>
+                <td class="wt-350">Total</td>
                 <td class="wt-100">
                    Rp {{ number_format($data->total_price) }}
                 </td>
             </tr>
             <tr>
-                <td class="wt-555">Tunai</td>
+                <td class="wt-350">Tunai</td>
                 <td class="wt-100">
                     Rp {{ number_format($data->total_price + $data->change_money ) }}
                 </td>
             </tr>
             <tr>
-                <td class="wt-555">Kembali</td>
+                <td class="wt-350">Kembali</td>
                 <td class="wt-100">
                     Rp {{ number_format($data->change_money) }}
                 </td>
             </tr>
         </table>
         <span>
-            ----------------------------------------------------------------------------------------------------------------------------
+            ----------------------------------------------------------------------------------------------------------
         </span>
         </div>
         <div class="container text-center pr-150 pl-150" style="margin-top: 100px;">
             <p>
                 Terima Kasih Ya Gaiss
-                <br><br>
-                Pembeli Tetaplah Pembeli
+                <br>
+                Pembeli Adalah Raja
             </p>
         </div>
     </div>

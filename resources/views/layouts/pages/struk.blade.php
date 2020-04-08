@@ -70,11 +70,15 @@
                         <p class="mt-3">
                             Wikrama Cafe
                             <br>
-                            Jl.sindangsari dan itulah jalan ninjaku
+                            Jl. Raya Wangun No.21, RT.01/RW.06, Sindangsari, Kec. Bogor Tim, Kota Bogor, Jawa Barat 16146
                             <br>
-                            Telp (023)9823213422
+                            Telp (0251)8242411
                             <br>
-                            {{ $report->code }}
+                            No Pemesanan: {{ $report->code }}
+                            <br>
+                            Nama: {{ $report->name }}
+                            <br>
+                            Kasir : {{ $user->name }}
                         </p>
                         <p>
                             --------------------------------------------------------------------------------------------------------------------------------------------------
@@ -138,8 +142,8 @@
                                 <div class="col-md-4">
                                     <p class="text-center font-weight-bold">
                                         Terima Kasih Ya Gaiss
-                                        <br><br>
-                                        Pembeli Tetaplah Pembeli
+                                        <br>
+                                        Pembeli Adalah Raja
                                     </p>
                                 </div>
                                 <div class="col-md-4"></div>

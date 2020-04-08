@@ -124,6 +124,7 @@ Route::get('/carts/{cart}','CartController@destroy')->name('carts.destroy');
 
 Route::put('/suppliers/{updatePasok}','SupplierController@updatePasok')->name('suppliers.updatePasok');
 Route::post('/admin/suppliers/pasok','SupplierController@pasok')->name('suppliers.pasok');
+Route::get('/admin/grafik','FavoriteController@grafik')->name('favorites.grafik');
 
 Auth::routes();
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Favorite;
 use App\Cart;
 use App\Report;
 use App\OrderDetail;
@@ -24,7 +25,7 @@ class OrderController extends Controller
 
     public function process(Request $request)
     {
-
+        
         $test = 10 < 10;
     
         // dd($test);
@@ -44,9 +45,26 @@ class OrderController extends Controller
             ->first();
 
         $reports = $order->orderDetails()->get();
-
         foreach ($reports as $r) {
 
+            $cekFav = Favorite::where('product_id',$r->product_id)
+                ->first();
+            
+            if ($cekFav) {
+                Favorite::where(['product_id' => $r->product_id])->update([
+                    'point' => $cekFav->point + $r->qty
+                ]);
+            }else{
+                $product = Product::where('id',$r->product_id)->with('menuCategory')->first();
+                Favorite::create([
+                    'product_id' => $r->product_id,
+                    'menu_category_id' => $product->menuCategory->id,
+                    'point' => $r->qty,
+                ]);
+            }
+
+
+        
             // CODE Report
             $kdReport = Report::select(['code'])->max('code');
 
@@ -121,6 +139,8 @@ class OrderController extends Controller
             }
 
 
+
+
         }
 
         Order::where(['id' => $request->order_id])->update([
@@ -167,7 +187,8 @@ class OrderController extends Controller
                 'order_id' => $booking->id,
                 'product_id' => $key['product_id'],
                 'qty' => $key['qty'],
-                'description' => $key['desc']
+                'description' => $key['desc'],
+                'tanggal' => $date
             ]);
         }
 

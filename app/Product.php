@@ -28,4 +28,9 @@ class Product extends Model
     {
         return $this->hasOne('App\Supplier');
     }
+
+    public function favorite()
+    {
+        return $this->hasMany('App\Favorite');
+    }
 }

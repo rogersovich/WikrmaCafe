@@ -282,6 +282,7 @@ class CashierController extends Controller
 
     public function process($id){
 
+
         $user = Auth::user();
 
         $order = Order::with('Booking','OrderDetails.Product')->where('id', $id)->first();
@@ -362,25 +363,27 @@ class CashierController extends Controller
 
     public function struk(){
 
-        $report = Order::latest()->first();
-
+        $user = Auth::user();
+        $report = Order::orderBy('updated_at', 'DESC')->first();
+      
         $data = OrderDetail::with('Product.MenuCategory')
                 ->where('order_id', $report->id)->get();
+        //   dd($user);
 
-        return view('layouts.pages.struk', compact('report','data'));
+        return view('layouts.pages.struk', compact('report','data','user'));
     }
 
     public function print($id){
 
+        $user = Auth::user();
         $data = Order::find($id);
         $order_details = OrderDetail::with('Product.MenuCategory')
             ->where('order_id', $data->id)->get();
 
-        // $order = Order::where('id', $data->id)->first();
+        $size = array(0,0,685.98,396.85);
+        $pdf = PDF::loadView('pdf.kasir_pdf', compact('data','order_details','user'));
 
-        $pdf = PDF::loadView('pdf.kasir_pdf', compact('data','order_details'));
-
-        return $pdf->setPaper('a4', 'landscape')->save('test.pdf')->stream('haha.pdf');
+        return $pdf->setPaper($size, 'landscape')->save('test.pdf')->stream('haha.pdf');
 
     }
 

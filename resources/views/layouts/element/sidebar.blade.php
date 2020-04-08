@@ -160,6 +160,13 @@
                   Laporan
               </a>
           </li>
+
+          <li class="nav-item">
+            <a id="grafik-id" class="nav-link" href="{{ route('favorites.grafik') }}">
+                <i class="fa fa-chart-pie text-default"></i>
+                Grafik
+            </a>
+        </li>
         </ul>
 
       </div>
@@ -211,6 +218,10 @@
                 $('.nav-item a').removeClass('sidebar-color');
                 $('#floor-id i').removeClass('text-default');
                 $('#floor-id').addClass('sidebar-color');
+            }else if( urls[1] == 'admin/grafik' || urls[1] == 'admin/grafik/' || urls[1] == 'admin/grafik/create' || urls[1] == 'admin/floors/'+asli[2]+'/edit' ){
+                $('.nav-item a').removeClass('sidebar-color');
+                $('#grafik-id i').removeClass('text-default');
+                $('#grafik-id').addClass('sidebar-color');
             }else{
                 $('.nav-item a').removeClass('sidebar-color');
                 $('#dashboard-id i').removeClass('text-default');

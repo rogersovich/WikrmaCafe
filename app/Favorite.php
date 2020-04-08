@@ -4,19 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderDetail extends Model
+class Favorite extends Model
 {
-    protected $fillable = [
-        'order_id',
+    protected $fillable= [
         'product_id',
-        'qty',
-        'tanggal',
-        'description'
+        'point',
+        'menu_category_id'
     ];
 
     public function product()
     {
         return $this->belongsTo('App\Product');
     }
-
 }

@@ -374,18 +374,6 @@ class ReportController extends Controller
 
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Report  $report
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Report $report)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
